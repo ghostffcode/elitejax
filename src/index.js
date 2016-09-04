@@ -4,7 +4,7 @@ class elitejax {
   // get config via object for elitejax constructor
   constructor (config = {}) {
     this.config = config;
-    this.ajaxIt(this.getEl());
+    this.ajaxForm(this.getEl());
   };
 
   // gets elements that has been marked for elitejax
@@ -46,20 +46,8 @@ class elitejax {
     return val;
   }
 
-  // convert object to url parameter
-  params (obj = {}) {
-    var str = "";
-    for (var key in obj) {
-        if (str != "") {
-            str += "&";
-        }
-        str += key + "=" + obj[key];
-    }
-    return str;
-  }
 
-
-  ajaxIt (el) {
+  ajaxForm (el) {
     // Loop through all the elements
     el.forEach((v, i) => {
       // add on submit event listener to all of them
@@ -68,6 +56,7 @@ class elitejax {
         let action = e.target.getAttribute('action');
         let method = e.target.getAttribute('method').toUpperCase();
         let data = this.getElVal(e.target.elements); // data for ajax
+        let callback = this.config.cb;
         // get AJAX ready
         $.ajax({
           method: method,
@@ -76,9 +65,9 @@ class elitejax {
           data: data,
           dataType: this.config.resType
         })
-        .done(function(x) {
-          console.log(x);
-        })
+        .done(function (x) {
+          callback(x);
+        });
 
       });
     });
@@ -89,7 +78,10 @@ class elitejax {
 let ej = (config = {
   async: true,
   cType: "application/json",
-  resType: 'json'
+  resType: 'json',
+  cb: function (data) {
+    console.log(data);
+  }
 }) => {
   return new elitejax(config);
 }
