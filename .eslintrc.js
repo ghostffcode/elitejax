@@ -127,12 +127,6 @@ module.exports = {
       "valid-typeof": 2,
       "wrap-iife": [2, "any"],
       "yield-star-spacing": [2, "both"],
-      "yoda": [2, "never"],
-
-      "standard/object-curly-even-spacing": [2, "either"],
-      "standard/array-bracket-even-spacing": [2, "either"],
-      "standard/computed-property-even-spacing": [2, "even"],
-
-      "promise/param-names": 2
+      "yoda": [2, "never"]
     }
 };
