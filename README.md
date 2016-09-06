@@ -2,14 +2,14 @@
 
 Simplifying Ajax Requests Using HTML attributes
 
-### __Introduction__
+### **Introduction**
 ---
 Elitejax is a standalone javascript library that makes AJAX requests a lot more easier without you writing a single line of javascript.
 
 All you have to do is add data-elitejax="true" attribute to your form tag and you are good to go
 
 
-#### ___Example___
+#### **Example**
 
 * To send an AJAX reequest to the spotify API Endpoint, searching for artists by name:
 
@@ -21,14 +21,14 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
 </form>
 ```
 
-### __ Installation __
+### **Installation**
 ---
 You can install this library by cloning this git and reference the javascript files from the build directory or using bower:
 ```
 bower install elitejax
 ```
 
-### ___ Exclude form field ___
+### Exclude form field
 ___
 To exclude a form field in your form from your AJAX request, you can add data-ej-x attribute to that field, like:
 ```html
@@ -36,7 +36,7 @@ To exclude a form field in your form from your AJAX request, you can add data-ej
 <input type+"input" data-ej-x />
 ```
 
-### ___ Adding custom configurations ___
+### Adding custom configurations
 ---
 Due to elitejax's flexibility you can add custom configuration for each form in your webpage. First specify a name for your form and the use it with ej.configure, like so:
 
@@ -53,19 +53,19 @@ Due to elitejax's flexibility you can add custom configuration for each form in 
 
 The configuration object argument for the configure method takes 4 parameters:
 
-async ___ default: true ___ : You can set this to true or false
+async **default: true** : You can set this to true or false
 
-cType ___ default: "application/json" ___ : This is the content type header.
+cType **default: "application/json"** : This is the content type header.
 
-resType ___ default: "json" ___ : This is the response type of the AJAX query, you can use jsonp for cross domain requests.
+resType **default: "json"** : This is the response type of the AJAX query, you can use jsonp for cross domain requests.
 
-callback ___ default: function ___ : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
+callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
-## __ License __
+## **License**
 ___
 Elitejax is Licensed under the [MIT License](../blob/master/LICENSE)
 
-## __Contributing __
+## **Contributing**
 ___
 Please do! Send a pull request after your modifications.
 
