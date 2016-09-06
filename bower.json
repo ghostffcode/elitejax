@@ -1,0 +1,25 @@
+{
+  "name": "elitejax",
+  "description": "Simplifying Ajax Requests Using HTML attributes",
+  "main": "./build/elitejax.js",
+  "authors": [
+    "Chimeremeze Ukah <bliss@ghostffco.de>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "simple",
+    "ajax",
+    "elite",
+    "ajax",
+    "elitejax",
+    "ajax"
+  ],
+  "homepage": "https://github.com/ghostffcode/elitejax",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
