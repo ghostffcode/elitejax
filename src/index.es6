@@ -35,7 +35,7 @@ class Elitejax {
     const res = [];
     const elem = document.querySelectorAll('form');
     Array.from(elem).forEach((val) => {
-      if (val.getAttribute('data-elitejax')) {
+      if (val.getAttribute('data-elitejax') !== null) {
         res.push(val);
       }
     });
@@ -86,52 +86,58 @@ class Elitejax {
   ajaxForm (el) {
     // Loop through all the elements
     el.forEach((v, i) => {
-      // add on submit event listener to all of them
-      v.addEventListener(v.getAttribute('data-listen'), (e) => {
+      // add on {listen} event listener to all of them
+      v.addEventListener('submit', (e) => {
         e.preventDefault(); // stop submission
         let name = e.target.getAttribute('name');
         let action = e.target.getAttribute('action');
         let method = e.target.getAttribute('method').toUpperCase();
         let data = this.getElVal(e.target.elements); // data for ajax
+        // build complete configuration
         if (this.config[name] === undefined) {
           this.configure(name);
         }
-        // destructure configuration for given form
-        var { async, cType, resType, callback } = this.config[name];
-        // get AJAX ready
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState === 4 && this.status === 200) {
-            let response = this.responseText;
-            if (resType === 'json') {
-              response = JSON.parse(response);
-              callback(response);
-            }
-          }
-        };
-        // make request
-        if (method === 'GET' && resType !== 'jsonp') {
-          xhttp.open(method, action + '?' + this.params(data), async);
-          xhttp.setRequestHeader('Content-type', cType);
-          xhttp.send();
-        } else if (method === 'GET' && resType === 'jsonp') {
-          var script = document.createElement('script');
-          script.type = 'text/javascript';
-          // create random callback name
-          var cbName = `ej_${Date.now()}`;
-          // create add callback function to global callback object
-          window.callback[cbName] = callback;
-          // send data and callback function name to be added as parameters
-          script.src = action + this.params(data, resType, `callback.${cbName}`);
-          document.getElementsByTagName('head')[0].appendChild(script);
-        } else {
-          xhttp.open(method, action, async);
-          xhttp.setRequestHeader('Content-type', cType);
-          xhttp.send(this.params(data));
-        }
+        this.ajaxIt(action, method, data, this.config[name]);
       });
     });
   }
+
+  ajaxIt (action, method, data, config) {
+    // destructure configuration for given form
+    var { async, cType, resType, callback } = config;
+    // get AJAX ready
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        let response = this.responseText;
+        if (resType === 'json') {
+          response = JSON.parse(response);
+          callback(response);
+        }
+      }
+    };
+    // make request
+    if (method === 'GET' && resType !== 'jsonp') {
+      xhttp.open(method, action + '?' + this.params(data), async);
+      xhttp.setRequestHeader('Content-type', cType);
+      xhttp.send();
+    } else if (method === 'GET' && resType === 'jsonp') {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      // create random callback name
+      const cbName = `ej_${Date.now()}`;
+      // create add callback function to global callback object
+      window.callback[cbName] = callback;
+      // send data and callback function name to be added as parameters
+      script.src = action + this.params(data, resType, `callback.${cbName}`);
+      document.getElementsByTagName('head')[0].appendChild(script);
+    } else {
+      xhttp.open(method, action, async);
+      xhttp.setRequestHeader('Content-type', cType);
+      xhttp.send(this.params(data));
+    }
+  }
+
 }
 
 let ej = () => {
