@@ -7,6 +7,7 @@
   <body>
     <form name="spotify" data-elitejax="true" data-listen="submit" action="https://api.spotify.com/v1/search" method="get">
       Enter name: <input type="text" name="q"><br />
+      Enter name: <input type="text" name="query" data-ej-x="true"><br />
       <select class="" name="type">
         <option value="artist">Artist</option>
         <option value="album">Album</option>
@@ -24,9 +25,5 @@
     </form>
     <!-- <script src="../build/elitejax.min.js" charset="utf-8"></script> -->
     <script src="elitejax.js"></script>
-    <script type="text/javascript">
-    ej.configure('wiki', {async: true, resType: 'jsonp' });
-    ej.configure('spotify', {async: true});
-    </script>
   </body>
 </html>
