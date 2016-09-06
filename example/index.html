@@ -5,7 +5,7 @@
     <title>Elitejax Trial</title>
   </head>
   <body>
-    <form name="spotify" data-elitejax="true" data-listen="submit" action="https://api.spotify.com/v1/search" method="get">
+    <form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" method="get">
       Enter name: <input type="text" name="q"><br />
       Enter name: <input type="text" name="query" data-ej-x="true"><br />
       <select class="" name="type">
@@ -17,7 +17,7 @@
       <input type="submit" value="Submit">
     </form>
 
-    <form data-elitejax="true" name="wiki" data-listen="submit" action="https://en.wikipedia.org/w/api.php" method="get">
+    <form data-elitejax="true" name="wiki" action="https://en.wikipedia.org/w/api.php" method="get">
       <input type="hidden" name="format" value="json">
       <input type="hidden" name="action" value="opensearch">
       <input type="text" name="search" value=""><br />
