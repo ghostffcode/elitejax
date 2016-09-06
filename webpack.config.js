@@ -13,7 +13,7 @@ module.exports = {
       { test: /\.es6?$/, exclude: /node_modules/, loader: 'eslint-loader', include: __dirname + '/' }
     ],
     loaders: [
-      { test: /\.es6$/, exclude: /node_modules/, loader: "babel", query: { presets: ['es2015'] } }
+      { test: /\.es6$/, exclude: /node_modules/, loader: "babel" }
     ]
   },
   resolve: {
