@@ -62,11 +62,9 @@ resType **default: "json"** : This is the response type of the AJAX query, you c
 callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
 ## **License**
-___
 Elitejax is Licensed under the [MIT License](../blob/master/LICENSE)
 
 ## **Contributing**
-___
 Please do! Send a pull request after your modifications.
 
 Sharing is caring.... make sure to let your peers know.
