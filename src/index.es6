@@ -60,7 +60,8 @@ class Elitejax {
     const val = [true, '', ''];
     const name = inputEl.name.toLowerCase();
     const value = inputEl.value;
-    if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit') {
+    const ex = inputEl.getAttribute('data-ej-x');
+    if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit' && ex === null) {
       val[1] = name;
       val[2] = value;
     } else {
@@ -92,6 +93,9 @@ class Elitejax {
         let action = e.target.getAttribute('action');
         let method = e.target.getAttribute('method').toUpperCase();
         let data = this.getElVal(e.target.elements); // data for ajax
+        if (this.config[name] === undefined) {
+          this.configure(name);
+        }
         // destructure configuration for given form
         var { async, cType, resType, callback } = this.config[name];
         // get AJAX ready
