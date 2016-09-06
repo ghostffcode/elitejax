@@ -53,24 +53,50 @@
 	var Elitejax = function () {
 	  // get config via object for elitejax constructor
 	  function Elitejax() {
-	    var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
 	    _classCallCheck(this, Elitejax);
 	
-	    this.config = config;
+	    this.config = {};
+	    window.callback = {}; // add callback object to window
 	    this.ajaxForm(this.getEl());
 	  }
 	
-	  // gets elements that has been marked for elitejax
+	  // function to add configurations to selected forms
 	
 	
 	  _createClass(Elitejax, [{
+	    key: 'configure',
+	    value: function configure(name) {
+	      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	
+	      // set default configuration
+	      var defaultConfig = {
+	        async: true,
+	        cType: 'application/json',
+	        resType: 'json',
+	        callback: function callback(data) {
+	          console.log(data);
+	        }
+	      };
+	
+	      for (var prop in defaultConfig) {
+	        if (config[prop] === undefined) {
+	          config[prop] = defaultConfig[prop];
+	        }
+	      }
+	
+	      this.config[name] = config;
+	      return this.config[name];
+	    }
+	
+	    // gets elements that has been marked for elitejax
+	
+	  }, {
 	    key: 'getEl',
 	    value: function getEl() {
 	      var res = [];
 	      var elem = document.querySelectorAll('form');
 	      Array.from(elem).forEach(function (val) {
-	        if (val.getAttribute('data-elitejax')) {
+	        if (val.getAttribute('data-elitejax') !== null) {
 	          res.push(val);
 	        }
 	      });
@@ -101,7 +127,8 @@
 	      var val = [true, '', ''];
 	      var name = inputEl.name.toLowerCase();
 	      var value = inputEl.value;
-	      if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit') {
+	      var ex = inputEl.getAttribute('data-ej-x');
+	      if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit' && ex === null) {
 	        val[1] = name;
 	        val[2] = value;
 	      } else {
@@ -116,9 +143,11 @@
 	    key: 'params',
 	    value: function params() {
 	      var obj = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	      var resType = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+	      var cbName = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
 	
 	      var str = '';
-	      str = this.config.resType === 'jsonp' ? str + 'callback=callback' : str;
+	      str = resType === 'jsonp' ? '?' + str + 'callback=' + cbName : str;
 	      for (var key in obj) {
 	        if (str !== '') {
 	          str += '&';
@@ -134,36 +163,61 @@
 	
 	      // Loop through all the elements
 	      el.forEach(function (v, i) {
-	        // add on submit event listener to all of them
-	        v.addEventListener(v.getAttribute('data-listen'), function (e) {
+	        // add on {listen} event listener to all of them
+	        v.addEventListener('submit', function (e) {
 	          e.preventDefault(); // stop submission
+	          var name = e.target.getAttribute('name');
 	          var action = e.target.getAttribute('action');
 	          var method = e.target.getAttribute('method').toUpperCase();
 	          var data = _this.getElVal(e.target.elements); // data for ajax
-	          var callback = _this.config.cb;
-	          var resType = _this.config.resType;
-	          // get AJAX ready
-	          var xhttp = new XMLHttpRequest();
-	          xhttp.onreadystatechange = function () {
-	            if (this.readyState === 4 && this.status === 200) {
-	              var response = this.responseText;
-	              if (resType === 'json') {
-	                response = JSON.parse(response);
-	                callback(response);
-	              }
-	            }
-	          };
-	          // make request
-	          if (method === 'GET') {
-	            xhttp.open(method, action + '?' + _this.params(data), _this.config.async);
-	            xhttp.send();
-	          } else {
-	            xhttp.open(method, action, _this.config.async);
-	            xhttp.setRequestHeader('Content-type', _this.config.cType);
-	            xhttp.send(_this.params(data));
+	          // build complete configuration
+	          if (_this.config[name] === undefined) {
+	            _this.configure(name);
 	          }
+	          _this.ajaxIt(action, method, data, _this.config[name]);
 	        });
 	      });
+	    }
+	  }, {
+	    key: 'ajaxIt',
+	    value: function ajaxIt(action, method, data, config) {
+	      // destructure configuration for given form
+	      var async = config.async;
+	      var cType = config.cType;
+	      var resType = config.resType;
+	      var callback = config.callback;
+	      // get AJAX ready
+	
+	      var xhttp = new XMLHttpRequest();
+	      xhttp.onreadystatechange = function () {
+	        if (this.readyState === 4 && this.status === 200) {
+	          var response = this.responseText;
+	          if (resType === 'json') {
+	            response = JSON.parse(response);
+	            callback(response);
+	          }
+	        }
+	      };
+	      // make request
+	      if (method === 'GET' && resType !== 'jsonp') {
+	        xhttp.open(method, action + '?' + this.params(data), async);
+	        xhttp.setRequestHeader('Content-type', cType);
+	        xhttp.send();
+	      } else if (method === 'GET' && resType === 'jsonp') {
+	        var script = document.createElement('script');
+	        script.type = 'text/javascript';
+	        // create random callback name
+	        var cbName = 'ej_' + Date.now();
+	        // create add callback function to global callback object
+	        window.callback[cbName] = callback;
+	        // send data and callback function name to be added as parameters
+	        script.src = action + this.params(data, resType, 'callback.' + cbName);
+	        document.getElementsByTagName('head')[0].appendChild(script);
+	      } else {
+	        xhttp.open(method, action, async);
+	        xhttp.setRequestHeader('Content-type', cType);
+	        xhttp.send(this.params(data));
+	      }
 	    }
 	  }]);
 	
@@ -171,20 +225,14 @@
 	}();
 	
 	var ej = function ej() {
-	  var config = arguments.length <= 0 || arguments[0] === undefined ? {
-	    async: true,
-	    cType: 'application/json',
-	    resType: 'json',
-	    cb: function cb(data) {
-	      console.log(data);
-	    }
-	  } : arguments[0];
-	
-	  return new Elitejax(config);
+	  return new Elitejax();
 	};
 	
 	// make module available to browser
-	window.ej = window.elitejax = ej;
+	window.ej = window.elitejax = ej();
+	
+	// call our class instanciator, whatever the name is
+	ej;
 
 /***/ }
 /******/ ]);
