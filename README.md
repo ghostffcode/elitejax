@@ -33,7 +33,7 @@ ___
 To exclude a form field in your form from your AJAX request, you can add data-ej-x attribute to that field, like:
 ```html
 <!-- below form field will be ignored -->
-<input type+"input" data-ej-x />
+<input type="input" data-ej-x />
 ```
 
 ### Adding custom configurations
