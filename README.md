@@ -11,7 +11,7 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
 
 #### **Example**
 
-* To send an AJAX reequest to the spotify API Endpoint, searching for artists by name:
+* To send an AJAX request to the spotify API Endpoint, searching for artists by name:
 
 ```html
 <form data-elitejax="true" action="https://api.spotify.com/v1/search" method="get">
@@ -46,7 +46,7 @@ To exclude a form field in your form from your AJAX request, you can add data-ej
 
 ### Adding custom configurations
 ---
-Due to elitejax's flexibility you can add custom configuration for each form in your webpage. First specify a name for your form and the use it with ej.configure, like so:
+Due to elitejax's flexibility, you can add custom configuration for each form in your webpage. First specify a name for your form and then use it with ej.configure, like so:
 
 ```html
 <form name="spotify" action="" method="get">
@@ -61,13 +61,13 @@ Due to elitejax's flexibility you can add custom configuration for each form in 
 
 The configuration object argument for the configure method takes 4 parameters:
 
-async **default: true** : You can set this to true or false
+* async **default: true** : You can set this to true or false
 
-cType **default: "application/json"** : This is the content type header.
+* cType **default: "application/json"** : This is the content type header.
 
-resType **default: "json"** : This is the response type of the AJAX query, you can use jsonp for cross domain requests.
+* resType **default: "json"** : This is the response type of the AJAX query, you can use jsonp for cross domain requests.
 
-callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
+* callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
 ## **License**
 Elitejax is Licensed under the [MIT License](../master/LICENSE)
