@@ -48,7 +48,7 @@ To exclude a form field in your form from your AJAX request, you can add data-ej
 Due to elitejax's flexibility you can add custom configuration for each form in your webpage. First specify a name for your form and the use it with ej.configure, like so:
 
 ```html
-<form name="spotify"
+<form name="spotify" action="" method="get">
 .....
 
 </form>
