@@ -19,7 +19,12 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
   <input type="hidden" name="type" value="artist">
   <input type="submit" value="Submit">
 </form>
+
+<!-- include elitejax library from bower components directory -->
+<script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
 ```
+
+[![elitejax](markedit.jpg)](https://youtu.be/Hg9Xilkc5M0)
 
 ### **Installation**
 ---
@@ -62,7 +67,7 @@ resType **default: "json"** : This is the response type of the AJAX query, you c
 callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
 ## **License**
-Elitejax is Licensed under the [MIT License](../blob/master/LICENSE)
+Elitejax is Licensed under the [MIT License](../master/LICENSE)
 
 ## **Contributing**
 Please do! Send a pull request after your modifications.
