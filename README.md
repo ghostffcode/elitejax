@@ -24,7 +24,7 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
 <script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
 ```
 
-[![elitejax](markedit.jpg)](https://youtu.be/Hg9Xilkc5M0)
+[![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
 
 ### **Installation**
 ---
