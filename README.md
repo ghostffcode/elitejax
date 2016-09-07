@@ -1,5 +1,7 @@
 # elitejax
 
+[![Build Status](https://travis-ci.org/ghostffcode/elitejax.svg?branch=master)](https://travis-ci.org/ghostffcode/elitejax) [![Bower version](https://badge.fury.io/bo/elitejax.svg)](https://badge.fury.io/bo/elitejax) 
+
 Simplifying Ajax Requests Using HTML attributes
 
 ### **Introduction**
