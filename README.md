@@ -16,7 +16,7 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
 * To send an AJAX request to the spotify API Endpoint, searching for artists by name:
 
 ```html
-<form data-elitejax="true" action="https://api.spotify.com/v1/search" method="get">
+<form data-elitejax="true" name="spotify" action="https://api.spotify.com/v1/search" method="get">
   Enter Artist name: <input type="text" name="q"><br />
   <input type="hidden" name="type" value="artist">
   <input type="submit" value="Submit">
@@ -51,7 +51,7 @@ To exclude a form field in your form from your AJAX request, you can add data-ej
 Due to elitejax's flexibility, you can add custom configuration for each form in your webpage. First specify a name for your form and then use it with ej.configure, like so:
 
 ```html
-<form name="spotify" action="" method="get">
+<form data-elitejax="true" name="spotify" action="https://api.spotify.com/v1/search" method="get">
 .....
 
 </form>
