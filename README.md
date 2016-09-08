@@ -58,7 +58,7 @@ Due to elitejax's flexibility, you can add custom configuration for each form in
 <!-- include elitejax library from bower components directory -->
 <script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
 <script type="text/javascript">
-    ej.configure('spotify'[, {configuration}]);
+    elitejax.configure('spotify'[, {configuration}]);
 </script>
 ```
 
