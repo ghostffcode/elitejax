@@ -83,7 +83,7 @@ elitejax.ajaxIt(url, method, data[, requestName]);
 * data **(object)** : data you want to send to the url
 * requestName - optional **(string)** : The name you want to give to your AJAX request. You need to set this if you want to use custom configuration (the elitejax configure method) with your AJAX request.
 
-, like so:
+So, we can customize the spotify API call to run on page load instead of depending on user interaction like so:
 ```html
 <script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -96,7 +96,6 @@ elitejax.ajaxIt(url, method, data[, requestName]);
   }
 </script>
 ```
-The above script will execute exactly like the regular form submission request
 
 ## **License**
 Elitejax is Licensed under the [MIT License](../master/LICENSE)
