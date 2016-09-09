@@ -1,6 +1,6 @@
 # elitejax
 
-[![Build Status](https://travis-ci.org/ghostffcode/elitejax.svg?branch=master)](https://travis-ci.org/ghostffcode/elitejax) [![Bower version](https://badge.fury.io/bo/elitejax.svg)](https://badge.fury.io/bo/elitejax) 
+[![Build Status](https://travis-ci.org/ghostffcode/elitejax.svg?branch=master)](https://travis-ci.org/ghostffcode/elitejax) [![Bower version](https://badge.fury.io/bo/elitejax.svg)](https://badge.fury.io/bo/elitejax)
 
 Simplifying Ajax Requests Using HTML attributes
 
@@ -43,7 +43,7 @@ ___
 To exclude a form field in your form from your AJAX request, you can add data-ej-x attribute to that field, like:
 ```html
 <!-- below form field will be ignored -->
-<input type="input" data-ej-x />
+<input type="input" data-elitejax-x />
 ```
 
 ### Adding custom configurations
