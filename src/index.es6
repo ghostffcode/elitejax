@@ -111,7 +111,7 @@ class Elitejax {
         e.preventDefault(); // stop submission
         let name = e.target.getAttribute('name');
         let action = e.target.getAttribute('action');
-        let method = e.target.getAttribute('method').toUpperCase();
+        let method = e.target.getAttribute('method');
         let data = this.getElVal(e.target.elements); // data for ajax
         // build complete configuration
         this.ajaxIt(action, method, data, name);
@@ -120,6 +120,7 @@ class Elitejax {
   }
 
   ajaxIt (action, method, data, name = null) {
+    method = method.toUpperCase();
     if (this.config[name] === undefined || this.config[name] === null) {
       this.configure(name);
     }
