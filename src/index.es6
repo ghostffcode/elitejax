@@ -60,7 +60,7 @@ class Elitejax {
     const val = [true, '', ''];
     const name = inputEl.name.toLowerCase();
     const value = inputEl.value;
-    const ex = inputEl.getAttribute('data-ej-x');
+    const ex = inputEl.getAttribute('data-elitejax-x');
     if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit' && ex === null) {
       val[1] = name;
       val[2] = value;
@@ -83,6 +83,26 @@ class Elitejax {
     return str;
   }
 
+  xmlParser(xml) {
+    let parseXml = null;
+    if (window.DOMParser) {
+      parseXml = function(xmlStr) {
+        return (new window.DOMParser()).parseFromString(xmlStr, 'text/xml');
+      };
+    } else if (typeof window.ActiveXObject !== undefined && new window.ActiveXObject('Microsoft.XMLDOM')) {
+      parseXml = function(xmlStr) {
+        var xmlDoc = new window.ActiveXObject('Microsoft.XMLDOM');
+        xmlDoc.async = 'false';
+        xmlDoc.loadXML(xmlStr);
+        return xmlDoc;
+      };
+    } else {
+      parseXml = function() { return null; };
+    }
+
+    return parseXml(xml);
+  }
+
   ajaxForm (el) {
     // Loop through all the elements
     el.forEach((v, i) => {
@@ -94,17 +114,17 @@ class Elitejax {
         let method = e.target.getAttribute('method').toUpperCase();
         let data = this.getElVal(e.target.elements); // data for ajax
         // build complete configuration
-        if (this.config[name] === undefined) {
-          this.configure(name);
-        }
-        this.ajaxIt(action, method, data, this.config[name]);
+        this.ajaxIt(action, method, data, name);
       });
     });
   }
 
-  ajaxIt (action, method, data, config) {
+  ajaxIt (action, method, data, name = null) {
+    if (this.config[name] === undefined || this.config[name] === null) {
+      this.configure(name);
+    }
     // destructure configuration for given form
-    var { async, cType, resType, callback } = config;
+    var { async, cType, resType, callback } = this.config[name];
     // get AJAX ready
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -112,6 +132,11 @@ class Elitejax {
         let response = this.responseText;
         if (resType === 'json') {
           response = JSON.parse(response);
+          callback(response);
+        } else if (resType === 'xml') {
+          response = this.xmlParser(response);
+          callback(response);
+        } else {
           callback(response);
         }
       }
