@@ -46,6 +46,8 @@
 
 	'use strict';
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -127,7 +129,7 @@
 	      var val = [true, '', ''];
 	      var name = inputEl.name.toLowerCase();
 	      var value = inputEl.value;
-	      var ex = inputEl.getAttribute('data-ej-x');
+	      var ex = inputEl.getAttribute('data-elitejax-x');
 	      if (name !== '' && value !== '' && name !== 'submit' && value !== 'submit' && ex === null) {
 	        val[1] = name;
 	        val[2] = value;
@@ -157,6 +159,29 @@
 	      return str;
 	    }
 	  }, {
+	    key: 'xmlParser',
+	    value: function xmlParser(xml) {
+	      var parseXml = null;
+	      if (window.DOMParser) {
+	        parseXml = function parseXml(xmlStr) {
+	          return new window.DOMParser().parseFromString(xmlStr, 'text/xml');
+	        };
+	      } else if (_typeof(window.ActiveXObject) !== undefined && new window.ActiveXObject('Microsoft.XMLDOM')) {
+	        parseXml = function parseXml(xmlStr) {
+	          var xmlDoc = new window.ActiveXObject('Microsoft.XMLDOM');
+	          xmlDoc.async = 'false';
+	          xmlDoc.loadXML(xmlStr);
+	          return xmlDoc;
+	        };
+	      } else {
+	        parseXml = function parseXml() {
+	          return null;
+	        };
+	      }
+	
+	      return parseXml(xml);
+	    }
+	  }, {
 	    key: 'ajaxForm',
 	    value: function ajaxForm(el) {
 	      var _this = this;
@@ -171,21 +196,24 @@
 	          var method = e.target.getAttribute('method').toUpperCase();
 	          var data = _this.getElVal(e.target.elements); // data for ajax
 	          // build complete configuration
-	          if (_this.config[name] === undefined) {
-	            _this.configure(name);
-	          }
-	          _this.ajaxIt(action, method, data, _this.config[name]);
+	          _this.ajaxIt(action, method, data, name);
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'ajaxIt',
-	    value: function ajaxIt(action, method, data, config) {
+	    value: function ajaxIt(action, method, data) {
+	      var name = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
+	
+	      if (this.config[name] === undefined || this.config[name] === null) {
+	        this.configure(name);
+	      }
 	      // destructure configuration for given form
-	      var async = config.async;
-	      var cType = config.cType;
-	      var resType = config.resType;
-	      var callback = config.callback;
+	      var _config$name = this.config[name];
+	      var async = _config$name.async;
+	      var cType = _config$name.cType;
+	      var resType = _config$name.resType;
+	      var callback = _config$name.callback;
 	      // get AJAX ready
 	
 	      var xhttp = new XMLHttpRequest();
@@ -194,6 +222,11 @@
 	          var response = this.responseText;
 	          if (resType === 'json') {
 	            response = JSON.parse(response);
+	            callback(response);
+	          } else if (resType === 'xml') {
+	            response = this.xmlParser(response);
+	            callback(response);
+	          } else {
 	            callback(response);
 	          }
 	        }
