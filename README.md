@@ -72,6 +72,32 @@ The configuration object argument for the configure method takes 4 parameters:
 
 * callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
+### Sending Custom AJAX requests
+---
+You can use the elitejax ajaxIt method to send a custom AJAX request:
+```javascript
+elitejax.ajaxIt(url, method, data[, requestName]);
+```
+* url **(string)** : the API Endpoint or url the request is to be made to.
+* method **(string)** : can be get/post/delete/put request type.
+* data **(object)** : data you want to send to the url
+* requestName - optional **(string)** : The name you want to give to your AJAX request. You need to set this if you want to use custom configuration (the elitejax configure method) with your AJAX request.
+
+, like so:
+```html
+<script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+  window.onload = function () {
+    var data = {
+      q: 'Justin',
+      type: 'artist'
+    }
+    elitejax.ajaxIt('https://api.spotify.com/v1/search', 'get', data, 'spotifyCustom');
+  }
+</script>
+```
+The above script will execute exactly like the regular form submission request
+
 ## **License**
 Elitejax is Licensed under the [MIT License](../master/LICENSE)
 
