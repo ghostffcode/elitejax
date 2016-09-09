@@ -72,7 +72,7 @@ The configuration object argument for the configure method takes 4 parameters:
 
 * callback **default: function** : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully
 
-### Sending Custom AJAX requests
+### Making Custom AJAX requests
 ---
 You can use the elitejax ajaxIt method to send a custom AJAX request:
 ```javascript
