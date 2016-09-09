@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Elitejax by ghostffcode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Elitejax</h1>
+      <h2 class="project-tagline">Simplifying Ajax Requests Using HTML attributes</h2>
+      <a href="https://github.com/ghostffcode/elitejax" class="btn">View on GitHub</a>
+      <a href="https://github.com/ghostffcode/elitejax/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ghostffcode/elitejax/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="elitejax" class="anchor" href="#elitejax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>elitejax</h1>
+
+<p><a href="https://travis-ci.org/ghostffcode/elitejax"><img src="https://travis-ci.org/ghostffcode/elitejax.svg?branch=master" alt="Build Status"></a> <a href="https://badge.fury.io/bo/elitejax"><img src="https://badge.fury.io/bo/elitejax.svg" alt="Bower version"></a></p>
+
+<p>Simplifying Ajax Requests Using HTML attributes</p>
+
+<h3>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Introduction</strong>
+</h3>
+
+<hr>
+
+<p>Elitejax is a standalone javascript library that makes AJAX requests a lot more easier without you writing a single line of javascript.</p>
+
+<p>All you have to do is add data-elitejax="true" attribute to your form tag and you are good to go</p>
+
+<h4>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Example</strong>
+</h4>
+
+<ul>
+<li>To send an AJAX request to the spotify API Endpoint, searching for artists by name:</li>
+</ul>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span> <span class="pl-e">data-elitejax</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>spotify<span class="pl-pds">"</span></span> <span class="pl-e">action</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.spotify.com/v1/search<span class="pl-pds">"</span></span> <span class="pl-e">method</span>=<span class="pl-s"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>&gt;
+  Enter Artist name: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">br</span> /&gt;
+  &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>artist<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>submit<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>Submit<span class="pl-pds">"</span></span>&gt;
+&lt;/<span class="pl-ent">form</span>&gt;
+
+<span class="pl-c">&lt;!-- include elitejax library from bower components directory --&gt;</span>
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/elitejax/build/elitejax.min.js<span class="pl-pds">"</span></span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Installation</strong>
+</h3>
+
+<hr>
+
+<p>You can install this library by cloning this git and reference the javascript files from the build directory or using bower:</p>
+
+<pre><code>bower install elitejax
+</code></pre>
+
+<h3>
+<a id="sample-usage-video" class="anchor" href="#sample-usage-video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Sample Usage Video</strong>
+</h3>
+
+<p><a href="https://youtu.be/Hg9Xilkc5M0"><img src="eliteJAX.png" alt="elitejax"></a></p>
+
+<h3>
+<a id="exclude-form-field" class="anchor" href="#exclude-form-field" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exclude form field</h3>
+
+<hr>
+
+<p>To exclude a form field in your form from your AJAX request, you can add data-ej-x attribute to that field, like:</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- below form field will be ignored --&gt;</span>
+&lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>input<span class="pl-pds">"</span></span> <span class="pl-e">data-elitejax-x</span> /&gt;</pre></div>
+
+<h3>
+<a id="adding-custom-configurations" class="anchor" href="#adding-custom-configurations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding custom configurations</h3>
+
+<hr>
+
+<p>Due to elitejax's flexibility, you can add custom configuration for each form in your webpage. First specify a name for your form and then use it with ej.configure, like so:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span> <span class="pl-e">data-elitejax</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>spotify<span class="pl-pds">"</span></span> <span class="pl-e">action</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.spotify.com/v1/search<span class="pl-pds">"</span></span> <span class="pl-e">method</span>=<span class="pl-s"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>&gt;
+.....
+
+&lt;/<span class="pl-ent">form</span>&gt;
+<span class="pl-c">&lt;!-- include elitejax library from bower components directory --&gt;</span>
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/elitejax/build/elitejax.min.js<span class="pl-pds">"</span></span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">    <span class="pl-smi">elitejax</span>.<span class="pl-en">configure</span>(<span class="pl-s"><span class="pl-pds">'</span>spotify<span class="pl-pds">'</span></span>[, {configuration}]);</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p>The configuration object argument for the configure method takes 4 parameters:</p>
+
+<ul>
+<li><p>async <strong>default: true</strong> : You can set this to true or false</p></li>
+<li><p>cType <strong>default: "application/json"</strong> : This is the content type header.</p></li>
+<li><p>resType <strong>default: "json"</strong> : This is the response type of the AJAX query, you can use jsonp for cross domain requests.</p></li>
+<li><p>callback <strong>default: function</strong> : The default callback logs the data to the console. You can specify your callback function for when the request completes successfully</p></li>
+</ul>
+
+<h3>
+<a id="making-custom-ajax-requests" class="anchor" href="#making-custom-ajax-requests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Making Custom AJAX requests</h3>
+
+<hr>
+
+<p>You can use the elitejax ajaxIt method to send a custom AJAX request:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">elitejax</span>.<span class="pl-en">ajaxIt</span>(url, method, data[, requestName]);</pre></div>
+
+<ul>
+<li>url <strong>(string)</strong> : the API Endpoint or url the request is to be made to.</li>
+<li>method <strong>(string)</strong> : can be get/post/delete/put request type.</li>
+<li>data <strong>(object)</strong> : data you want to send to the url</li>
+<li>requestName - optional <strong>(string)</strong> : The name you want to give to your AJAX request. You need to set this if you want to use custom configuration (the elitejax configure method) with your AJAX request.</li>
+</ul>
+
+<p>So, we can customize the spotify API call to run on page load instead of depending on user interaction like so:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/elitejax/build/elitejax.min.js<span class="pl-pds">"</span></span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;</span>
+<span class="pl-s1">  <span class="pl-c1">window</span>.<span class="pl-en">onload</span> <span class="pl-k">=</span> <span class="pl-k">function</span> () {</span>
+<span class="pl-s1">    <span class="pl-k">var</span> data <span class="pl-k">=</span> {</span>
+<span class="pl-s1">      q<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Justin<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">      type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>artist<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">    <span class="pl-smi">elitejax</span>.<span class="pl-en">ajaxIt</span>(<span class="pl-s"><span class="pl-pds">'</span>https://api.spotify.com/v1/search<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>get<span class="pl-pds">'</span></span>, data, <span class="pl-s"><span class="pl-pds">'</span>spotifyCustom<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">  }</span>
+<span class="pl-s1">&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>License</strong>
+</h2>
+
+<p>Elitejax is Licensed under the <a href="../master/LICENSE">MIT License</a></p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Contributing</strong>
+</h2>
+
+<p>Please do! Send a pull request after your modifications.</p>
+
+<p>Sharing is caring.... make sure to let your peers know.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ghostffcode/elitejax">Elitejax</a> is maintained by <a href="https://github.com/ghostffcode">ghostffcode</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
