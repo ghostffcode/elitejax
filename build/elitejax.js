@@ -193,7 +193,7 @@
 	          e.preventDefault(); // stop submission
 	          var name = e.target.getAttribute('name');
 	          var action = e.target.getAttribute('action');
-	          var method = e.target.getAttribute('method').toUpperCase();
+	          var method = e.target.getAttribute('method');
 	          var data = _this.getElVal(e.target.elements); // data for ajax
 	          // build complete configuration
 	          _this.ajaxIt(action, method, data, name);
@@ -205,6 +205,7 @@
 	    value: function ajaxIt(action, method, data) {
 	      var name = arguments.length <= 3 || arguments[3] === undefined ? null : arguments[3];
 	
+	      method = method.toUpperCase();
 	      if (this.config[name] === undefined || this.config[name] === null) {
 	        this.configure(name);
 	      }
