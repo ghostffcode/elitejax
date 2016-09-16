@@ -68,8 +68,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _classCallCheck(this, Elitejax);
 	
 	    this.config = {};
-	    window.callback = {}; // add callback object to window
-	    this.ajaxForm(this.getEl());
+	    // window.callback = {}; // add callback object to window
+	    if (window) {
+	      this.ajaxForm(this.getEl());
+	    }
 	  }
 	
 	  // function to add configurations to selected forms
@@ -253,9 +255,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // create random callback name
 	        var cbName = 'ej_' + Date.now();
 	        // create add callback function to global callback object
-	        window.callback[cbName] = callback;
+	        this.callback[cbName] = callback;
 	        // send data and callback function name to be added as parameters
-	        script.src = action + this.params(data, resType, 'callback.' + cbName);
+	        script.src = action + this.params(data, resType, 'elitejax.callback.' + cbName);
 	        document.getElementsByTagName('head')[0].appendChild(script);
 	      } else {
 	        xhttp.open(method, action, async);
@@ -269,7 +271,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}();
 	
 	var ej = function ej() {
-	  return new Elitejax();
+	  var ej = new Elitejax();
+	  ej.callback = {};
+	  return ej;
 	};
 	
 	(function (exports) {
