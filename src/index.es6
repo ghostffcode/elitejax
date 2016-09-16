@@ -170,8 +170,6 @@ let ej = () => {
   return new Elitejax();
 };
 
-// make module available to browser
-window.ej = window.elitejax = ej();
-
-// call our class instanciator, whatever the name is
-ej;
+(function (exports) {
+   module.exports = ej();
+})(typeof exports === 'undefined' ? this['elitejax'] = {} : exports);
