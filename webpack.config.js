@@ -6,7 +6,10 @@ module.exports = {
   devtool: "source-map",
   output: {
     path: __dirname + "/build/",
-    filename: PROD ? "elitejax.min.js" : "elitejax.js"
+    filename: PROD ? "elitejax.min.js" : "elitejax.js",
+    library: 'elitejax',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     preLoaders: [
