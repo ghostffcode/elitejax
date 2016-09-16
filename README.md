@@ -28,7 +28,11 @@ All you have to do is add data-elitejax="true" attribute to your form tag and yo
 
 ### **Installation**
 ---
-You can install this library by cloning this git and reference the javascript files from the build directory or using bower:
+You can install this library by cloning this git and reference the javascript files from the build directory, using npm:
+```
+npm install elitejax --save
+```
+or using bower:
 ```
 bower install elitejax
 ```
