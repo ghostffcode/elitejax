@@ -24,5 +24,13 @@
       <input type="submit" name="submit" value="Submit Wikipedia">
     </form>
     <script src="build/elitejax.min.js"></script>
+    <script type="text/javascript">
+      elitejax.configure('wiki', {
+        resType: 'jsonp',
+        callback: function (data) {
+          console.log(data);
+        }
+      })
+    </script>
   </body>
 </html>
