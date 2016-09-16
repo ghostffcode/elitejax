@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("elitejax", [], factory);
+	else if(typeof exports === 'object')
+		exports["elitejax"] = factory();
+	else
+		root["elitejax"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -42,7 +52,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -262,12 +272,12 @@
 	  return new Elitejax();
 	};
 	
-	// make module available to browser
-	window.ej = window.elitejax = ej();
-	
-	// call our class instanciator, whatever the name is
-	ej;
+	(function (exports) {
+	  module.exports = ej();
+	})( false ? undefined['elitejax'] = {} : exports);
 
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;
 //# sourceMappingURL=elitejax.js.map
