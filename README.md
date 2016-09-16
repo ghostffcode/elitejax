@@ -37,6 +37,8 @@ or using bower:
 bower install elitejax
 ```
 
+NB: You can't load elitejax as a node module
+
 ### **Sample Usage Video**
 
 [![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
