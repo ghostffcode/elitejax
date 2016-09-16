@@ -4,8 +4,10 @@ class Elitejax {
   // get config via object for elitejax constructor
   constructor () {
     this.config = {};
-    window.callback = {}; // add callback object to window
-    this.ajaxForm(this.getEl());
+    // window.callback = {}; // add callback object to window
+    if (window) {
+      this.ajaxForm(this.getEl());
+    }
   }
 
   // function to add configurations to selected forms
@@ -153,9 +155,9 @@ class Elitejax {
       // create random callback name
       const cbName = `ej_${Date.now()}`;
       // create add callback function to global callback object
-      window.callback[cbName] = callback;
+      this.callback[cbName] = callback;
       // send data and callback function name to be added as parameters
-      script.src = action + this.params(data, resType, `callback.${cbName}`);
+      script.src = action + this.params(data, resType, `elitejax.callback.${cbName}`);
       document.getElementsByTagName('head')[0].appendChild(script);
     } else {
       xhttp.open(method, action, async);
@@ -167,7 +169,9 @@ class Elitejax {
 }
 
 let ej = () => {
-  return new Elitejax();
+  let ej = new Elitejax();
+  ej.callback = {};
+  return ej;
 };
 
 (function (exports) {
