@@ -4,7 +4,7 @@
   "description": "Simplifying Ajax Requests Using HTML attributes",
   "main": "./src/index",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --content-base ./example/",
+    "start": "webpack-dev-server --inline --hot --config ./webpack.config.js",
     "build": "webpack && PROD_ENV=1 webpack",
     "lint": "eslint . --ext .es6 --ignore-path .gitignore --cache || true"
   },
