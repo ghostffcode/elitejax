@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const PROD = process.env.NODE_ENV === 'production';
 
+
 module.exports = {
   entry: __dirname + "/src/index.es6",
   devtool: "source-map",
