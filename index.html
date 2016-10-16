@@ -5,7 +5,8 @@
     <title>Elitejax Trial</title>
   </head>
   <body>
-    <form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" method="get">
+    <div class="result"></div>
+    <form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" method="get" data-postTo=".result" data-post="artists.items[0].name">
       Enter name: <input type="text" name="q"><br />
       Enter name: <input type="text" name="query" data-elitejax-x="true"><br />
       <select class="" name="type">
@@ -23,7 +24,7 @@
       <input type="text" name="search" value=""><br />
       <input type="submit" name="submit" value="Submit Wikipedia">
     </form>
-    <script src="build/elitejax.min.js"></script>
+    <script src="build/elitejax.js"></script>
     <script type="text/javascript">
       elitejax.configure('wiki', {
         resType: 'jsonp',
