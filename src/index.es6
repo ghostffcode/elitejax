@@ -1,13 +1,14 @@
 'use strict';
 
+import axios from 'axios';
+import { stringify } from 'querystring';
+
 class Elitejax {
   // get config via object for elitejax constructor
-  constructor () {
+  constructor(document) {
     this.config = {};
-    // window.callback = {}; // add callback object to window
-    if (window) {
-      this.ajaxForm(this.getEl());
-    }
+    this.document = document;
+    this.ajaxForm(this.getEl());
   }
 
   // function to add configurations to selected forms
@@ -34,27 +35,35 @@ class Elitejax {
 
   // gets elements that has been marked for elitejax
   getEl () {
-    const res = [];
-    const elem = document.querySelectorAll('form');
-    Array.from(elem).forEach((val) => {
-      if (val.getAttribute('data-elitejax') !== null) {
-        res.push(val);
+    let res = [];
+    const elem = this.document.querySelectorAll('form');
+    Array.from(elem).forEach((form) => {
+      if (form.getAttribute('data-elitejax') === 'true') {
+        const postTo = form.getAttribute('data-postTo');
+        res.push({form, postTo});
       }
     });
     return res;
   }
 
   // gets value from form elements
-  getElVal (formEl) {
+  formData (inputs) {
     const res = {};
-    const num = formEl.length;
+    const num = inputs.length;
     for (let i = 0; i < num; i++) {
-      const valid = this.validInput(formEl[i]);
+      const valid = this.validInput(inputs[i]);
       if (valid[0]) {
         res[valid[1]] = valid[2];
       }
     }
     return res;
+  }
+
+  resolve (path, data) {
+    return path.split(/[.\[]+/).reduce(function(prev, curr) {
+        curr = curr.replace(/[\]]+/, '');
+        return prev ? prev[curr] : undefined;
+    }, data);
   }
 
   // validate user inputs according to input types
@@ -75,105 +84,69 @@ class Elitejax {
   // convert object to url parameter
   params (obj = {}, resType = '', cbName = '') {
     var str = '';
-    str = (resType === 'jsonp') ? `?${str}callback=${cbName}` : str;
-    for (var key in obj) {
-        if (str !== '') {
-            str += '&';
-        }
-        str += `${key}=${obj[key]}`;
-    }
+    str = (resType === 'jsonp') ? `?callback=${cbName}&` : str;
+    str += `${stringify(obj)}`;
     return str;
   }
 
-  xmlParser(xml) {
-    let parseXml = null;
-    if (window.DOMParser) {
-      parseXml = function(xmlStr) {
-        return (new window.DOMParser()).parseFromString(xmlStr, 'text/xml');
-      };
-    } else if (typeof window.ActiveXObject !== undefined && new window.ActiveXObject('Microsoft.XMLDOM')) {
-      parseXml = function(xmlStr) {
-        var xmlDoc = new window.ActiveXObject('Microsoft.XMLDOM');
-        xmlDoc.async = 'false';
-        xmlDoc.loadXML(xmlStr);
-        return xmlDoc;
-      };
-    } else {
-      parseXml = function() { return null; };
-    }
-
-    return parseXml(xml);
-  }
-
-  ajaxForm (el) {
-    // Loop through all the elements
-    el.forEach((v, i) => {
-      // add on {listen} event listener to all of them
-      v.addEventListener('submit', (e) => {
-        e.preventDefault(); // stop submission
+  ajaxForm (forms) {
+    forms.forEach((form, index) => {
+      form['form'].addEventListener('submit', (e) => {
+        e.preventDefault();
         let name = e.target.getAttribute('name');
-        let action = e.target.getAttribute('action');
+        let url = e.target.getAttribute('action');
         let method = e.target.getAttribute('method');
-        let data = this.getElVal(e.target.elements); // data for ajax
-        // build complete configuration
-        this.ajaxIt(action, method, data, name);
+        let post = e.target.getAttribute('data-post');
+        let data = this.formData(e.target.elements);
+        // make ajax request
+        this.ajaxIt(url, method, data, post, form['postTo'], name);
       });
     });
   }
 
-  ajaxIt (action, method, data, name = null) {
+  ajaxIt (url, method, data, post, postTo, name = null) {
     method = method.toUpperCase();
     if (this.config[name] === undefined || this.config[name] === null) {
       this.configure(name);
     }
     // destructure configuration for given form
-    var { async, cType, resType, callback } = this.config[name];
-    // get AJAX ready
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) {
-        let response = this.responseText;
-        if (resType === 'json') {
-          response = JSON.parse(response);
-          callback(response);
-        } else if (resType === 'xml') {
-          response = this.xmlParser(response);
-          callback(response);
-        } else {
-          callback(response);
-        }
-      }
-    };
-    // make request
-    if (method === 'GET' && resType !== 'jsonp') {
-      xhttp.open(method, action + '?' + this.params(data), async);
-      xhttp.setRequestHeader('Content-type', cType);
-      xhttp.send();
-    } else if (method === 'GET' && resType === 'jsonp') {
-      const script = document.createElement('script');
+    var { resType, callback } = this.config[name];
+    if (resType === 'jsonp') {
+      const script = this.document.createElement('script');
       script.type = 'text/javascript';
-      // create random callback name
       const cbName = `ej_${Date.now()}`;
-      // create add callback function to global callback object
       this.callback[cbName] = callback;
-      // send data and callback function name to be added as parameters
-      script.src = action + this.params(data, resType, `elitejax.callback.${cbName}`);
-      document.getElementsByTagName('head')[0].appendChild(script);
+      script.src = url + this.params(data, resType, `elitejax.callback.${cbName}`);
+      this.document.getElementsByTagName('head')[0].appendChild(script);
     } else {
-      xhttp.open(method, action, async);
-      xhttp.setRequestHeader('Content-type', cType);
-      xhttp.send(this.params(data));
+      let req;
+      if (method === 'GET' || method === 'DELETE' || method === 'HEAD' && resType !== 'jsonp') {
+        req = axios.get(url, {params: data});
+      } else {
+        req = axios.post(url, data);
+      }
+      req.then((response) => {
+        if (postTo.length > 0) {
+          Array.from(this.document.querySelectorAll(postTo)).forEach((output) => {
+            output.innerHTML = this.resolve(post, response.data);
+          });
+        } else {
+          callback();
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 
 }
 
 let ej = () => {
-  let ej = new Elitejax();
+  let ej = new Elitejax(document);
   ej.callback = {};
   return ej;
 };
 
-(function (exports) {
-   module.exports = ej();
-})(typeof exports === 'undefined' ? this['elitejax'] = {} : exports);
+window['elitejax'] = ej();
+
+export default ej;
