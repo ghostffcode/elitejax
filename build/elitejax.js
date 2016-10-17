@@ -78,7 +78,7 @@
 	  _createClass(Elitejax, [{
 	    key: 'configure',
 	    value: function configure(name) {
-	      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 	
 	      // set default configuration
 	      var defaultConfig = {
@@ -163,9 +163,9 @@
 	  }, {
 	    key: 'params',
 	    value: function params() {
-	      var obj = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	      var resType = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
-	      var cbName = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
+	      var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	      var resType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+	      var cbName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 	
 	      var str = '';
 	      str = resType === 'jsonp' ? '?callback=' + cbName + '&' : str;
@@ -195,7 +195,7 @@
 	    value: function ajaxIt(url, method, data, post, postTo) {
 	      var _this2 = this;
 	
-	      var name = arguments.length <= 5 || arguments[5] === undefined ? null : arguments[5];
+	      var name = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
 	
 	      method = method.toUpperCase();
 	      if (this.config[name] === undefined || this.config[name] === null) {
@@ -238,15 +238,15 @@
 	  return Elitejax;
 	}();
 	
-	var ej = function ej() {
+	var elitejax = function elitejax() {
 	  var ej = new Elitejax(document);
 	  ej.callback = {};
 	  return ej;
 	};
 	
-	window['elitejax'] = ej();
+	window['elitejax'] = elitejax();
 	
-	exports.default = ej;
+	exports.default = elitejax;
 
 /***/ },
 /* 1 */
