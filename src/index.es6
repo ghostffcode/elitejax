@@ -141,12 +141,12 @@ class Elitejax {
 
 }
 
-let ej = () => {
+let elitejax = () => {
   let ej = new Elitejax(document);
   ej.callback = {};
   return ej;
 };
 
-window['elitejax'] = ej();
+window['elitejax'] = elitejax();
 
-export default ej;
+export default elitejax;
