@@ -35,7 +35,7 @@ The `data-post` attribute is used to specify what part of the data returned you 
   Category: <input type="text" name="type" value="artist"><br />
   <input type="submit" value="Submit">
 </form>
-<script src="path/to/javascript" charset="utf-8"></script>
+<script src="path/to/elitejax.min.js" charset="utf-8"></script>
 ```
 The above will place the result in the div element with .result class.
 
