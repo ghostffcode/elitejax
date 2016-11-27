@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="result"></div>
-    <form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" method="get" data-postTo=".result" data-post="artists.items[0].name">
+    <form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" data-post="artists.items[0].name" method="get" data-postTo=".result" >
       Enter name: <input type="text" name="q"><br />
       Enter name: <input type="text" name="query" data-elitejax-x="true"><br />
       <select class="" name="type">
@@ -31,7 +31,7 @@
         callback: function (data) {
           console.log(data);
         }
-      })
+      });
     </script>
   </body>
 </html>
