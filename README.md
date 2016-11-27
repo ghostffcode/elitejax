@@ -10,22 +10,6 @@ Elitejax is a standalone javascript library that makes AJAX requests a lot more 
 
 All you have to do is add data-elitejax="true" attribute to your form tag and you are good to go
 
-
-#### **Example**
-
-* To send an AJAX request to the spotify API Endpoint, searching for artists by name:
-
-```html
-<form data-elitejax="true" name="spotify" action="https://api.spotify.com/v1/search" method="get">
-  Enter Artist name: <input type="text" name="q"><br />
-  <input type="hidden" name="type" value="artist">
-  <input type="submit" value="Submit">
-</form>
-
-<!-- include elitejax library from bower components directory -->
-<script src="bower_components/elitejax/build/elitejax.min.js" charset="utf-8"></script>
-```
-
 ### **Installation**
 ---
 You can install this library by cloning this git and reference the javascript files from the build directory, using npm:
@@ -36,12 +20,6 @@ or using bower:
 ```
 bower install elitejax
 ```
-
-NB: You can't load elitejax as a node module
-
-### **Sample Usage Video**
-
-[![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
 
 ### Usage Without javascript
 If your request returns data as JSON, you can add to the DOM from that object without javascript using the `data-post` and `data-postTo` attributes in your form element.
@@ -57,8 +35,13 @@ The `data-post` attribute is used to specify what part of the data returned you 
   Category: <input type="text" name="type" value="artist"><br />
   <input type="submit" value="Submit">
 </form>
+<script src="path/to/javascript" charset="utf-8"></script>
 ```
 The above will place the result in the div element with .result class.
+
+### **Sample Usage Video**
+
+[![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
 
 ### Exclude form field
 ___
