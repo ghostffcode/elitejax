@@ -43,6 +43,22 @@ NB: You can't load elitejax as a node module
 
 [![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
 
+### Usage Without javascript
+If your request returns data as JSON, you can add to the DOM from that object without javascript using the `data-post` and `data-postTo` attributes in your form element.
+
+The `data-post` attribute is used to specify what part of the data returned you want to use.
+`data-postTo` is the DOM selector of where to post the resulting value.
+
+```html
+<!-- using the spotify API -->
+<div class="result"></div>
+<form name="spotify" data-elitejax="true" action="https://api.spotify.com/v1/search" data-post="artists.items[1].name" method="get" data-postTo=".result" >
+  Enter name: <input type="text" name="q"><br />
+  Category: <input type="text" name="type" value="artist"><br />
+  <input type="submit" value="Submit">
+</form>
+```
+The above will place the result in the div element with .result class.
 
 ### Exclude form field
 ___
