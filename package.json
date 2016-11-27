@@ -2,7 +2,8 @@
   "name": "elitejax",
   "version": "2.0",
   "description": "Simplifying Ajax Requests Using HTML attributes",
-  "main": "./src/index",
+  "main": "./build/elitejax.min.js",
+  "source": "./src/index",
   "scripts": {
     "start": "webpack-dev-server --inline --hot",
     "build": "webpack && NODE_ENV='production' webpack",
