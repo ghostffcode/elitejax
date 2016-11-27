@@ -1,6 +1,6 @@
 {
   "name": "elitejax",
-  "version": "v2.0.2",
+  "version": "2.0.2",
   "description": "Simplifying Ajax Requests Using HTML attributes",
   "main": "./build/elitejax.min.js",
   "source": "./src/index",
