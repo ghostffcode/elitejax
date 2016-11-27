@@ -78,7 +78,7 @@
 	  _createClass(Elitejax, [{
 	    key: 'configure',
 	    value: function configure(name) {
-	      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	      var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 	
 	      // set default configuration
 	      var defaultConfig = {
@@ -163,9 +163,9 @@
 	  }, {
 	    key: 'params',
 	    value: function params() {
-	      var obj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-	      var resType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-	      var cbName = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+	      var obj = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	      var resType = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+	      var cbName = arguments.length <= 2 || arguments[2] === undefined ? '' : arguments[2];
 	
 	      var str = '';
 	      str = resType === 'jsonp' ? '?callback=' + cbName + '&' : str;
@@ -192,10 +192,13 @@
 	    }
 	  }, {
 	    key: 'ajaxIt',
-	    value: function ajaxIt(url, method, data, post, postTo) {
+	    value: function ajaxIt(url, method, data) {
+	      var post = arguments.length <= 3 || arguments[3] === undefined ? '' : arguments[3];
+	
 	      var _this2 = this;
 	
-	      var name = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+	      var postTo = arguments.length <= 4 || arguments[4] === undefined ? null : arguments[4];
+	      var name = arguments.length <= 5 || arguments[5] === undefined ? null : arguments[5];
 	
 	      method = method.toUpperCase();
 	      if (this.config[name] === undefined || this.config[name] === null) {
@@ -210,8 +213,8 @@
 	        var script = this.document.createElement('script');
 	        script.type = 'text/javascript';
 	        var cbName = 'ej_' + Date.now();
-	        this.callback[cbName] = callback;
-	        script.src = url + this.params(data, resType, 'elitejax.callback.' + cbName);
+	        self.callback[cbName] = callback;
+	        script.src = url + this.params(data, resType, 'self.callback.' + cbName);
 	        this.document.getElementsByTagName('head')[0].appendChild(script);
 	      } else {
 	        var req = void 0;
@@ -221,12 +224,13 @@
 	          req = _axios2.default.post(url, data);
 	        }
 	        req.then(function (response) {
-	          if (postTo.length > 0) {
+	          // console.log(response);
+	          if (postTo !== null) {
 	            Array.from(_this2.document.querySelectorAll(postTo)).forEach(function (output) {
 	              output.innerHTML = _this2.resolve(post, response.data);
 	            });
 	          } else {
-	            callback();
+	            callback(response);
 	          }
 	        }).catch(function (err) {
 	          console.log(err);
@@ -240,7 +244,7 @@
 	
 	var elitejax = function elitejax() {
 	  var ej = new Elitejax(document);
-	  ej.callback = {};
+	  self.callback = {};
 	  return ej;
 	};
 	
@@ -1183,6 +1187,10 @@
 	    if (config.cancelToken) {
 	      // Handle cancellation
 	      config.cancelToken.promise.then(function onCanceled(cancel) {
+	        if (!request) {
+	          return;
+	        }
+	
 	        request.abort();
 	        reject(cancel);
 	        // Clean up request

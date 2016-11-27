@@ -104,7 +104,7 @@ class Elitejax {
     });
   }
 
-  ajaxIt (url, method, data, post, postTo, name = null) {
+  ajaxIt (url, method, data, post = '', postTo = null, name = null) {
     method = method.toUpperCase();
     if (this.config[name] === undefined || this.config[name] === null) {
       this.configure(name);
@@ -115,8 +115,8 @@ class Elitejax {
       const script = this.document.createElement('script');
       script.type = 'text/javascript';
       const cbName = `ej_${Date.now()}`;
-      this.callback[cbName] = callback;
-      script.src = url + this.params(data, resType, `elitejax.callback.${cbName}`);
+      self.callback[cbName] = callback;
+      script.src = url + this.params(data, resType, `self.callback.${cbName}`);
       this.document.getElementsByTagName('head')[0].appendChild(script);
     } else {
       let req;
@@ -126,12 +126,13 @@ class Elitejax {
         req = axios.post(url, data);
       }
       req.then((response) => {
-        if (postTo.length > 0) {
+        // console.log(response);
+        if (postTo !== null) {
           Array.from(this.document.querySelectorAll(postTo)).forEach((output) => {
             output.innerHTML = this.resolve(post, response.data);
           });
         } else {
-          callback();
+          callback(response);
         }
       }).catch((err) => {
         console.log(err);
@@ -143,7 +144,7 @@ class Elitejax {
 
 let elitejax = () => {
   let ej = new Elitejax(document);
-  ej.callback = {};
+  self.callback = {};
   return ej;
 };
 
