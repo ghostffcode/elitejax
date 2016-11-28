@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Elitejax by ghostffcode</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Elitejax</h1>
-      <h2 class="project-tagline">Simplifying Ajax Requests Using HTML attributes</h2>
-      <a href="https://github.com/ghostffcode/elitejax" class="btn">View on GitHub</a>
-      <a href="https://github.com/ghostffcode/elitejax/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/ghostffcode/elitejax/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <section class="main-content">
-      <h1>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Elitejax by ghostffcode</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Elitejax</h1>
+        <h2>Simplifying Ajax Requests Using HTML attributes</h2>
+        <a href="https://github.com/ghostffcode/elitejax" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="elitejax" class="anchor" href="#elitejax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>elitejax</h1>
 
 <p><a href="https://travis-ci.org/ghostffcode/elitejax"><img src="https://travis-ci.org/ghostffcode/elitejax.svg?branch=master" alt="Build Status"></a> <a href="https://badge.fury.io/bo/elitejax"><img src="https://badge.fury.io/bo/elitejax.svg" alt="Bower version"></a></p>
@@ -36,41 +45,46 @@
 
 <p>All you have to do is add data-elitejax="true" attribute to your form tag and you are good to go</p>
 
-<h4>
-<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Example</strong>
-</h4>
-
-<ul>
-<li>To send an AJAX request to the spotify API Endpoint, searching for artists by name:</li>
-</ul>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">form</span> <span class="pl-e">data-elitejax</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>spotify<span class="pl-pds">"</span></span> <span class="pl-e">action</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.spotify.com/v1/search<span class="pl-pds">"</span></span> <span class="pl-e">method</span>=<span class="pl-s"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span>&gt;
-  Enter Artist name: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">br</span> /&gt;
-  &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>hidden<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>artist<span class="pl-pds">"</span></span>&gt;
-  &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>submit<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>Submit<span class="pl-pds">"</span></span>&gt;
-&lt;/<span class="pl-ent">form</span>&gt;
-
-<span class="pl-c">&lt;!-- include elitejax library from bower components directory --&gt;</span>
-&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/elitejax/build/elitejax.min.js<span class="pl-pds">"</span></span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
-
 <h3>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Installation</strong>
 </h3>
 
 <hr>
 
-<p>You can install this library by cloning this git and reference the javascript files from the build directory or using bower:</p>
+<p>You can install this library by cloning this git and reference the javascript files from the build directory, using npm:</p>
+
+<pre><code>npm install elitejax --save
+</code></pre>
+
+<p>or using bower:</p>
 
 <pre><code>bower install elitejax
 </code></pre>
 
 <h3>
+<a id="usage-without-javascript" class="anchor" href="#usage-without-javascript" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage Without javascript</h3>
+
+<p>If your request returns data as JSON, you can add to the DOM from that object without javascript using the <code>data-post</code> and <code>data-postTo</code> attributes in your form element.</p>
+
+<p>The <code>data-post</code> attribute is used to specify what part of the data returned you want to use.
+<code>data-postTo</code> is the DOM selector of where to post the resulting value.</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- using the spotify API --&gt;</span>
+&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>result<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+&lt;<span class="pl-ent">form</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>spotify<span class="pl-pds">"</span></span> <span class="pl-e">data-elitejax</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">action</span>=<span class="pl-s"><span class="pl-pds">"</span>https://api.spotify.com/v1/search<span class="pl-pds">"</span></span> <span class="pl-e">data-post</span>=<span class="pl-s"><span class="pl-pds">"</span>artists.items[1].name<span class="pl-pds">"</span></span> <span class="pl-e">method</span>=<span class="pl-s"><span class="pl-pds">"</span>get<span class="pl-pds">"</span></span> <span class="pl-e">data-postTo</span>=<span class="pl-s"><span class="pl-pds">"</span>.result<span class="pl-pds">"</span></span> &gt;
+  Enter name: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>q<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">br</span> /&gt;
+  Category: &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text<span class="pl-pds">"</span></span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>type<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>artist<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">br</span> /&gt;
+  &lt;<span class="pl-ent">input</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>submit<span class="pl-pds">"</span></span> <span class="pl-e">value</span>=<span class="pl-s"><span class="pl-pds">"</span>Submit<span class="pl-pds">"</span></span>&gt;
+&lt;/<span class="pl-ent">form</span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>path/to/elitejax.min.js<span class="pl-pds">"</span></span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>The above will place the result in the div element with .result class.</p>
+
+<h3>
 <a id="sample-usage-video" class="anchor" href="#sample-usage-video" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Sample Usage Video</strong>
 </h3>
 
-<div class="videoWrapper">
-  <iframe width="560" height="349" src="https://www.youtube.com/embed/Hg9Xilkc5M0" frameborder="0" allowfullscreen></iframe>
-</div>
+<p><a href="https://youtu.be/Hg9Xilkc5M0"><img src="eliteJAX.png" alt="elitejax"></a></p>
 
 <h3>
 <a id="exclude-form-field" class="anchor" href="#exclude-form-field" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exclude form field</h3>
@@ -150,15 +164,25 @@
 <p>Please do! Send a pull request after your modifications.</p>
 
 <p>Sharing is caring.... make sure to let your peers know.</p>
+        </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/ghostffcode/elitejax">Elitejax</a> is maintained by <a href="https://github.com/ghostffcode">ghostffcode</a>.</span>
+        <aside id="sidebar">
+          <a href="https://github.com/ghostffcode/elitejax/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ghostffcode/elitejax/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/ghostffcode/elitejax"></a> is maintained by <a href="https://github.com/ghostffcode">ghostffcode</a>.</p>
 
-    </section>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
-
+  
   </body>
 </html>
