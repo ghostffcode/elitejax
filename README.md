@@ -39,13 +39,9 @@ The `data-post` attribute is used to specify what part of the data returned you 
 ```
 The above will place the result in the div element with .result class.
 
-### **Sample Usage Video**
-
-[![elitejax](eliteJAX.png)](https://youtu.be/Hg9Xilkc5M0)
-
 ### Exclude form field
 ___
-To exclude a form field in your form from your AJAX request, you can add data-ej-x attribute to that field, like:
+To exclude a form field in your form from your AJAX request, you can add data-elitejax-x attribute to that field, like:
 ```html
 <!-- below form field will be ignored -->
 <input type="input" data-elitejax-x />
